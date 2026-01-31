@@ -29,9 +29,18 @@ export class Rooms {
   // Structured directives : are methodes to change the behavior of the dom, for ex if the var is false hide the
   // element defenitifly from the DOM, we have 3 methodes => *NgIf for conditions, *NgFor for loops
   // N.B : In the last version ng we have new syntax @if, @for
-  public rooms: IRooms = {
+  rooms: IRooms = {
+    id: 1,
     totalRooms: 20,
     availableRoom: true,
     bookedRomms: 5
   }
+
+  roomList: IRooms[] = [
+    {id:2, totalRooms: 56, availableRoom: false, bookedRomms: 14},
+    {id:1, totalRooms: 12, availableRoom: true, bookedRomms: 4},
+    {id:3, totalRooms: 40, availableRoom: false, bookedRomms: 30}
+  ]
+
+  role: string = "client";
 }
