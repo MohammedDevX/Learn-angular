@@ -1,42 +1,46 @@
-<!-- This is the interpolation, to display data from class -->
-<h1>Welcome to our hotel {{hotelName}}</h1>
+<div class="container-fluid">
+  <!-- This is the interpolation, to display data from class -->
+  <!-- For ex slice pipe filter the element by adding 2 params : from - to -->
+  <h1>Welcome to our hotel {{hotelName | slice:0:3}}</h1>
 
-<!-- The element going to be hidden when the property binding is true -->
-<div [hidden]="availableRoom">
-  Number of rooms :
-  <!-- This is the propertyBinding -->
-  <span [innerText]="roomsNumber"></span> <br>
-</div>
-<!-- <input type="text" [value]="defaultValue"> -->
-
-<!-- This is the structured directive *ngIf -->
-<div *ngIf="rooms.availableRoom == true">
-  List of rooms :
-  <div>
-    <ul>
-      <!-- This is (for) directive -->
-      @for (room of roomList; track room.id) {
-        <li>RoomId : {{room.id}} | Total rooms : {{room.totalRooms}} | Is available : {{room.availableRoom}}</li>
-      }
-    </ul>
+  <!-- The element going to be hidden when the property binding is true -->
+  <div [hidden]="availableRoom">
+    Number of rooms :
+    <!-- This is the propertyBinding -->
+    <span [innerText]="roomsNumber"></span> <br>
   </div>
+  <!-- <input type="text" [value]="defaultValue"> -->
+
+  <!-- This is the structured directive *ngIf -->
+  <div *ngIf="rooms.availableRoom == true">
+    List of rooms :
+    <div>
+      <ul>
+        <!-- This is (for) directive -->
+        @for (room of roomList; track room.id) {
+          <!-- For ex this pipe add $ cion to the number etc ... -->
+          <li>RoomId : {{room.id}} | Total rooms : {{room.totalRooms | currency}} | Is available : {{room.availableRoom}}</li>
+        }
+      </ul>
+    </div>
+  </div>
+  <!-- This is (switch) directive -->
+  @switch (role) {
+    @case ("Admin") {
+      <div>Hello admin</div>
+    }
+    @case ("Client") {
+      <div>Hello client</div>
+    }
+    @default {
+      <div>Please login</div>
+    }
+  }
+
+  <!-- There is two differents way to handle (ngClass) directive -->
+  <!-- <div [ngClass]="rooms.availableRoom ? 'enable' : 'disable'">Status room</div> -->
+  <div [ngClass]="{enable: rooms.availableRoom, disable: !rooms.availableRoom}">Status room</div>
+
+  <!-- Here we call the function by using events -->
+  <input type="button" class="btn btn-primary" (click)="toggleAvailableRoom()" value="Toggle">
 </div>
-<!-- This is (switch) directive -->
-@switch (role) {
-  @case ("Admin") {
-    <div>Hello admin</div>
-  }
-  @case ("Client") {
-    <div>Hello client</div>
-  }
-  @default {
-    <div>Please login</div>
-  }
-}
-
-<!-- There is two differents way to handle (ngClass) directive -->
-<!-- <div [ngClass]="rooms.availableRoom ? 'enable' : 'disable'">Status room</div> -->
-<div [ngClass]="{enable: rooms.availableRoom, disable: !rooms.availableRoom}">Status room</div>
-
-<!-- Here we call the function by using events -->
-<input type="button" (click)="toggleAvailableRoom()" value="Toggle">

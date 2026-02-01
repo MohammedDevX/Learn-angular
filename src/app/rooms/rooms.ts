@@ -43,4 +43,6 @@ export class Rooms {
   ]
 
   role: string = "client";
+
+  // Pipes : methodes to transforme the objects
 }
