@@ -1,0 +1,9 @@
+<ul>
+  <!-- This is (for) directive -->
+  @for (room of rooms; track room.id) {
+    <!-- For ex this pipe add $ cion to the number etc ... -->
+    <li>
+      RoomId : {{ room.id }} | Total rooms : {{ room.totalRooms | currency }} | Is available :{{ room.availableRoom }}
+    </li>
+  }
+</ul>

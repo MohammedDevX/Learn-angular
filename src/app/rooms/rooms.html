@@ -15,13 +15,15 @@
   <div *ngIf="rooms.availableRoom == true">
     List of rooms :
     <div>
-      <ul>
+      <!-- <ul> -->
         <!-- This is (for) directive -->
-        @for (room of roomList; track room.id) {
+        <!-- @for (room of roomList; track room.id) { -->
           <!-- For ex this pipe add $ cion to the number etc ... -->
-          <li>RoomId : {{room.id}} | Total rooms : {{room.totalRooms | currency}} | Is available : {{room.availableRoom}}</li>
-        }
-      </ul>
+          <!-- <li>RoomId : {{room.id}} | Total rooms : {{room.totalRooms | currency}} | Is available : {{room.availableRoom}}</li> -->
+        <!-- } -->
+      <!-- </ul> -->
+
+      <app-rooms-list [rooms]="roomList"></app-rooms-list>
     </div>
   </div>
   <!-- This is (switch) directive -->

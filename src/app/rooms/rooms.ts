@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
+import { RoomsList } from './rooms-list/rooms-list';
 
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RoomsList],
   templateUrl: './rooms.html',
   styleUrl: './rooms.css',
 })
@@ -37,8 +38,8 @@ export class Rooms {
   }
 
   roomList: IRooms[] = [
-    {id:2, totalRooms: 56, availableRoom: false, bookedRomms: 14},
     {id:1, totalRooms: 12, availableRoom: true, bookedRomms: 4},
+    {id:2, totalRooms: 56, availableRoom: false, bookedRomms: 14},
     {id:3, totalRooms: 40, availableRoom: false, bookedRomms: 30}
   ]
 
