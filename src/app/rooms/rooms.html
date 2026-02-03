@@ -15,22 +15,20 @@
   <div *ngIf="rooms.availableRoom == true">
     List of rooms :
     <div>
-      <ul>
-        <!-- This is (for) directive -->
+      <!-- <ul>
+        This is (for) directive
         @for (room of roomList; track room.id) {
-          <!-- For ex this pipe add $ cion to the number etc ... -->
-<<<<<<< HEAD
-          <!-- <li>RoomId : {{room.id}} | Total rooms : {{room.totalRooms | currency}} | Is available : {{room.availableRoom}}</li> -->
-        <!-- } -->
-      <!-- </ul> -->
-
-      <app-rooms-list [rooms]="roomList" (selected)="onSelectRoom($event)"></app-rooms-list>
-      <!-- <app-rooms-list (selected)="onSelectNumber($event)">hy</app-rooms-list> -->
-=======
+          For ex this pipe add $ cion to the number etc ...
           <li>RoomId : {{room.id}} | Total rooms : {{room.totalRooms | currency}} | Is available : {{room.availableRoom}}</li>
         }
-      </ul>
->>>>>>> parent of 886c6d6 (Explain how to bind data from comp to other by using @Input)
+      </ul> -->
+
+      <!-- We have this liste as repetitive code so we decided to put it in dependent comp -->
+    <app-rooms-list [rooms]="roomList" (selected)="onSelectRoom($event)"></app-rooms-list>
+    @if (selectedRoom) {
+      <!-- Json pipe that debug objects -->
+      <div>{{selectedRoom | json}}</div>
+    }
     </div>
   </div>
   <!-- This is (switch) directive -->

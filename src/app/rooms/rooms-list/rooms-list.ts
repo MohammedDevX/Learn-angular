@@ -1,7 +1,9 @@
+import { identifierName } from '@angular/compiler';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IRooms } from '../irooms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Rooms } from '../rooms';
 
 @Component({
   selector: 'app-rooms-list',
@@ -31,9 +33,11 @@ export class RoomsList {
   // we have the list of rooms and against each room we have a button that call selectedRoom function
   // in each click event that send the room object to the mother comp
   @Output()
-  selected = new EventEmitter<IRooms>();
+  selected = new EventEmitter<IRooms>(); // This ang class have an emit() method that send data
+  // from shild to mother comp
 
   selectedRoom(room: IRooms) {
-    this.selected.emit(room);
+    this.selected.emit(room); // Here we send the data
   }
+
 }

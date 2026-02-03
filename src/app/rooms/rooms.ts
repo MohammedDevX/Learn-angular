@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
 import { RoomsList } from './rooms-list/rooms-list';
@@ -11,6 +11,7 @@ import { RoomsList } from './rooms-list/rooms-list';
   styleUrl: './rooms.css',
 })
 export class Rooms {
+
   // If you want to display this variable in the html, you must work with (interpolation), see the html file
   hotelName:string = "Saada";
 
@@ -50,5 +51,35 @@ export class Rooms {
   // Here this function get tha room object from shild comp called every seleted event
   onSelectRoom(room: IRooms) {
     console.log("The room is : ", room);
+    this.selectedRoom = room;
   }
+
+  // This is is the method that is called after constructor and before rendering the comp
+  ngOnInit(): void {
+    console.log("init value");
+  }
+
+  selectedRoom!: IRooms; // N.B : Whene you want to initialize an attribut you must to pass
+  // explicitly the default value, or use the (?) mark that say the attr can be null
+  // or use the (!) mark that say we are going to affect a value to the attr before use it in run time
+
+  // How to create an anonymous object :
+  // 1) Weak type :
+  ob = {id: 1, nom: "mohammed"};
+
+  // 2) Strong type :
+  ob2: {id: number, nom: string} = {
+    id: 1,
+    nom: "mohammed"
+  };
+
+  // Using inteface or class :
+  ob3: IRooms = {id: 1, totalRooms: 12, availableRoom: false, bookedRomms: 2};
+
+  /*
+    Component life cycle : stages a component goes through from building to destruction
+    - Constructor : The one who define how the object is building
+    - ngOnInit : In this stage we define what the comp should have before rendering the comp
+
+  */
 }
