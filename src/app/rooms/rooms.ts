@@ -38,8 +38,8 @@ export class Rooms {
   }
 
   roomList: IRooms[] = [
-    {id:1, totalRooms: 12, availableRoom: true, bookedRomms: 4},
     {id:2, totalRooms: 56, availableRoom: false, bookedRomms: 14},
+    {id:1, totalRooms: 12, availableRoom: true, bookedRomms: 4},
     {id:3, totalRooms: 40, availableRoom: false, bookedRomms: 30}
   ]
 
