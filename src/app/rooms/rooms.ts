@@ -45,5 +45,10 @@ export class Rooms {
 
   role: string = "client";
 
-  // Pipes : methodes to transforme the objects
+  // Pipes : methodes to transforme the objects, see the template page
+
+  // Here this function get tha room object from shild comp called every seleted event
+  onSelectRoom(room: IRooms) {
+    console.log("The room is : ", room);
+  }
 }

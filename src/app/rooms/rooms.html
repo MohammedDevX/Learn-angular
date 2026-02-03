@@ -23,7 +23,8 @@
         <!-- } -->
       <!-- </ul> -->
 
-      <app-rooms-list [rooms]="roomList"></app-rooms-list>
+      <app-rooms-list [rooms]="roomList" (selected)="onSelectRoom($event)"></app-rooms-list>
+      <!-- <app-rooms-list (selected)="onSelectNumber($event)">hy</app-rooms-list> -->
     </div>
   </div>
   <!-- This is (switch) directive -->
