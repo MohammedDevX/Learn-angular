@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { config } from './../app.config.server';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
 import { RoomsList } from './rooms-list/rooms-list';
@@ -57,6 +58,7 @@ export class Rooms {
   // This is is the method that is called after constructor and before rendering the comp
   ngOnInit(): void {
     console.log("init value");
+    // this.increase();
   }
 
   selectedRoom!: IRooms; // N.B : Whene you want to initialize an attribut you must to pass
@@ -80,6 +82,7 @@ export class Rooms {
     Component life cycle : stages a component goes through from building to destruction
     - Constructor : The one who define how the object is building
     - ngOnInit : In this stage we define what the comp should have before rendering the comp
-
+    - ChangeDetection : Whene we made a comp in this mode, he
   */
+
 }

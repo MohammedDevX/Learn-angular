@@ -1,15 +1,14 @@
-import { identifierName } from '@angular/compiler';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IRooms } from '../irooms';
+import { IRooms } from './../irooms';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Rooms } from '../rooms';
 
 @Component({
   selector: 'app-rooms-list',
   imports: [CommonModule, FormsModule],
   templateUrl: './rooms-list.html',
   styleUrl: './rooms-list.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsList {
   /*
@@ -38,6 +37,36 @@ export class RoomsList {
 
   selectedRoom(room: IRooms) {
     this.selected.emit(room); // Here we send the data
+    this.copy.push(4);
+    this.newCopy.push(4);
+    console.log("tab : " + this.tab);
+    console.log("copy : " + this.copy);
+    console.log("newTab : " + this.newTab);
+    console.log("newCopy : " + this.newCopy);
+    this.rooms.push(this.newRoom);
   }
 
+  newRoom: IRooms = {
+    id: 5,
+    totalRooms: 0,
+    availableRoom: false,
+    bookedRomms: 0
+  };
+
+  // N.B : Whene we have a tabe and we affecte the table to other, the other made a reference in
+  // the first table, so thats meen both made reference in the same table, so if we made changes
+  // in the second table, the first one also going to be affected, so the solution is work
+  // with spread operators, the same in objects
+  // Ex :
+  tab: number[] = [1, 2, 3];
+  copy: number[] = this.tab; // Here we just copy the reference of tab
+  newTab: number[] = [1, 2, 3];
+  newCopy: number[] = [...this.newTab];
+
+  /*
+    - changeDetection : The default behavior of angular that in every change detection, he
+    check all components even if an element in the comp is not changed, so by adding
+    changeDetection, angular check only changed elemnts, but pay attention, if the change
+    is maded in the same reference
+  */
 }
