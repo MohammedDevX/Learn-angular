@@ -1,5 +1,4 @@
-import { config } from './../app.config.server';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
 import { RoomsList } from './rooms-list/rooms-list';
@@ -22,9 +21,9 @@ export class Rooms {
 
   // Create events :
   availableRoom:boolean = false;
-  // Here we create the a function, it will be called every time the user click on the button and change the value
+  // Here we create a function, it will be called every time the user click on the button and change the value
   // of availableRoom
-  toggleAvailableRoom(this: any):void {
+  toggleAvailableRoom():void {
     this.availableRoom = !this.availableRoom;
     this.rooms.availableRoom = !this.rooms.availableRoom;
   }
@@ -49,8 +48,8 @@ export class Rooms {
 
   // Pipes : methodes to transforme the objects, see the template page
 
-  // Here this function get tha room object from shild comp called every seleted event
-  onSelectRoom(room: IRooms) {
+  // Here this function get the room object from shild comp called every time the child comp emit a data
+  onSelectRoom(room: IRooms) { // The param here get the data from child comp
     console.log("The room is : ", room);
     this.selectedRoom = room;
   }
@@ -63,7 +62,7 @@ export class Rooms {
 
   selectedRoom!: IRooms; // N.B : Whene you want to initialize an attribut you must to pass
   // explicitly the default value, or use the (?) mark that say the attr can be null
-  // or use the (!) mark that say we are going to affect a value to the attr before use it in run time
+  // or use the (!) mark that say we are going to affect a value to the attr before run time
 
   // How to create an anonymous object :
   // 1) Weak type :
@@ -82,7 +81,14 @@ export class Rooms {
     Component life cycle : stages a component goes through from building to destruction
     - Constructor : The one who define how the object is building
     - ngOnInit : In this stage we define what the comp should have before rendering the comp
-    - ChangeDetection : Whene we made a comp in this mode, he
   */
+
+    // ChangeDetection.onPush exemple :
+    click(): void {
+      this.roomList = [...this.roomList]; // Here if we dont change the reference with spread operator, the
+      // changement not going to be detected in child comp
+      this.roomList.push(this.rooms);
+      console.log(this.roomList);
+    }
 
 }

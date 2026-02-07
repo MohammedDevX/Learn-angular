@@ -20,8 +20,8 @@ export class RoomsList {
   // @Input :
   // The @Input decorator bind data from mother comp to shild one, in this exemple :
   // we have a list of rooms who can be used in defferents pages, so automaticly you are going
-  // to think about use this list as reutilisable component, but the probleme is hwo we can bind
-  // data from the comp to this comp ?
+  // to think about use this list as reutilisable component, but the probleme is how we can bind
+  // data from mother comp to this comp ?
   // The solution is using @Input so we create the used object and we call the selector of this
   // comp in the targeted comp and we pass the name of this object : see the rooms comp
   @Input()
@@ -43,7 +43,7 @@ export class RoomsList {
     console.log("copy : " + this.copy);
     console.log("newTab : " + this.newTab);
     console.log("newCopy : " + this.newCopy);
-    this.rooms.push(this.newRoom);
+    // this.rooms.push(this.newRoom);
   }
 
   newRoom: IRooms = {
@@ -53,7 +53,7 @@ export class RoomsList {
     bookedRomms: 0
   };
 
-  // N.B : Whene we have a tabe and we affecte the table to other, the other made a reference in
+  // N.B : Whene we have a table and we affect the table to other, the other made a reference on
   // the first table, so thats meen both made reference in the same table, so if we made changes
   // in the second table, the first one also going to be affected, so the solution is work
   // with spread operators, the same in objects
@@ -65,8 +65,16 @@ export class RoomsList {
 
   /*
     - changeDetection : The default behavior of angular that in every change detection, he
-    check all components even if an element in the comp is not changed, so by adding
-    changeDetection, angular check only changed elemnts, but pay attention, if the change
-    is maded in the same reference
+    check all components even if nothing in otehr comps is not changed, so by adding
+    changeDetection, angular check only comp that undergoes change, but pay attention, if the change
+    is maded in the same reference, you must use spread operators.
+    -- Exemple :
+    For ex we have an event in parent comp that push a room in roomList object, but we push on the same reference
+    in this case child comp not going to detecte the changement because the changement is made on parent comp,
+    but we have @Input ? even if @Input going to get the new element but because we made the changement only
+    with ref, so the changeDetection not going to detecte the changement, so the solution is work wiht
+    spread operators
+    N.B : If the click event was in child comp the changement going to be detected even if you work with
+    reference because, the event is detected
   */
 }

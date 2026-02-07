@@ -24,6 +24,7 @@
       </ul> -->
 
       <!-- We have this liste as repetitive code so we decided to put it in dependent comp -->
+      <!-- The event here should be the object that emit data from child comp -->
     <app-rooms-list [rooms]="roomList" (selected)="onSelectRoom($event)"></app-rooms-list>
     @if (selectedRoom) {
       <!-- Json pipe that debug objects -->
@@ -50,4 +51,5 @@
 
   <!-- Here we call the function by using events -->
   <input type="button" class="btn btn-primary" (click)="toggleAvailableRoom()" value="Toggle">
+  <!-- <input type="button" value="click me" (click)="click()"> -->
 </div>
