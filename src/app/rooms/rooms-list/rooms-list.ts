@@ -1,5 +1,5 @@
 import { IRooms } from './../irooms';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -27,6 +27,9 @@ export class RoomsList {
   @Input()
   rooms: IRooms[] = [];
 
+  @Input()
+  hotelName!: string;
+
   // @Output :
   // The @output decorator bind data from shild comp to mother one, in this exemple :
   // we have the list of rooms and against each room we have a button that call selectedRoom function
@@ -37,12 +40,12 @@ export class RoomsList {
 
   selectedRoom(room: IRooms) {
     this.selected.emit(room); // Here we send the data
-    this.copy.push(4);
-    this.newCopy.push(4);
-    console.log("tab : " + this.tab);
-    console.log("copy : " + this.copy);
-    console.log("newTab : " + this.newTab);
-    console.log("newCopy : " + this.newCopy);
+    // this.copy.push(4);
+    // this.newCopy.push(4);
+    // console.log("tab : " + this.tab);
+    // console.log("copy : " + this.copy);
+    // console.log("newTab : " + this.newTab);
+    // console.log("newCopy : " + this.newCopy);
     // this.rooms.push(this.newRoom);
   }
 
@@ -65,16 +68,34 @@ export class RoomsList {
 
   /*
     - changeDetection : The default behavior of angular that in every change detection, he
-    check all components even if nothing in otehr comps is not changed, so by adding
-    changeDetection, angular check only comp that undergoes change, but pay attention, if the change
-    is maded in the same reference, you must use spread operators.
+    check all components even if nothing in other comps is not changed, so by adding
+    changeDetection in mode onPush, angular check only comp that undergoes change, but pay attention,
+    if the change is maded in the same reference, you must use spread operators.
     -- Exemple :
     For ex we have an event in parent comp that push a room in roomList object, but we push on the same reference
-    in this case child comp not going to detecte the changement because the changement is made on parent comp,
-    but we have @Input ? even if @Input going to get the new element but because we made the changement only
+    in this case child comp not going to detecte the change because its made on parent comp,
+    but we have @Input ? even if @Input going to receive the new element but because we made the change only
     with ref, so the changeDetection not going to detecte the changement, so the solution is work wiht
     spread operators
-    N.B : If the click event was in child comp the changement going to be detected even if you work with
+    N.B : If the click event was in child comp the change going to be detected even if you work with
     reference because, the event is detected
   */
+
+  // ngOnChanges si declared by default the first time the comp is rendered before constructor, after that every
+  // time @Input undergoes a change
+  ngOnChanges(changes: SimpleChanges) {
+    // SimpleChanges is an object who contain one or multiple SimpleChange objects, eache one hase 3
+    // properties :
+    // - currentValue
+    // - previousValue
+    // - firstChange
+    console.log(changes);
+    console.log(changes["rooms"].currentValue[0]); // This is how you can access to
+    // console.log(changes["hotelName"].currentValue);
+  }
+
+  // This method is called each time there is an event in mother or shild comp
+  ngDoCheck() {
+    console.log("checked ");
+  }
 }

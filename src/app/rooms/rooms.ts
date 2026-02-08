@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
 import { RoomsList } from './rooms-list/rooms-list';
@@ -80,15 +80,20 @@ export class Rooms {
   /*
     Component life cycle : stages a component goes through from building to destruction
     - Constructor : The one who define how the object is building
-    - ngOnInit : In this stage we define what the comp should have before rendering the comp
+    - ngOnInit() : In this stage we define what the comp should have before rendering the comp
+    - ngOnChanges() : This fucntion is authorized only in comps that have @Input
+    N.B : ngOnChanges is called before ngOnInit, after that its called every time there is a change
+    - ngOnDoCheck() : This method is called each time there is an event in mother or shild comp
+    N.B : In the most cases we dont use it
   */
 
     // ChangeDetection.onPush exemple :
     click(): void {
       this.roomList = [...this.roomList]; // Here if we dont change the reference with spread operator, the
-      // changement not going to be detected in child comp
+      // change not going to be detected in child comp
       this.roomList.push(this.rooms);
+      // Or
+      // this.roomList = [...this.roomList, this.rooms];
       console.log(this.roomList);
     }
-
 }
