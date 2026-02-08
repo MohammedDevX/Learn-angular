@@ -1,7 +1,8 @@
 <div class="container-fluid">
   <!-- This is the interpolation, to display data from class -->
   <!-- For ex slice pipe filter the element by adding 2 params : from - to -->
-  <h1>Welcome to our hotel {{hotelName | slice:0:3}}</h1>
+  <!-- <h1>Welcome to our hotel {{hotelName | slice:0:3}}</h1> -->
+  <app-header></app-header>
 
   <!-- The element going to be hidden when the property binding is true -->
   <div [hidden]="availableRoom">
@@ -53,3 +54,4 @@
   <input type="button" class="btn btn-primary" (click)="toggleAvailableRoom()" value="Toggle">
   <input type="button" value="Add Room" class="btn btn-secondary" (click)="click()">
 </div>
+

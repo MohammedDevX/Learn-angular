@@ -1,12 +1,13 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
 import { RoomsList } from './rooms-list/rooms-list';
+import { Header } from '../header/header';
 
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [CommonModule, RoomsList],
+  imports: [CommonModule, RoomsList, Header],
   templateUrl: './rooms.html',
   styleUrl: './rooms.css',
 })
@@ -56,8 +57,9 @@ export class Rooms {
 
   // This is is the method that is called after constructor and before rendering the comp
   ngOnInit(): void {
-    console.log("init value");
+    // console.log("init value");
     // this.increase();
+    // console.log(this.header);
   }
 
   selectedRoom!: IRooms; // N.B : Whene you want to initialize an attribut you must to pass
@@ -83,8 +85,15 @@ export class Rooms {
     - ngOnInit() : In this stage we define what the comp should have before rendering the comp
     - ngOnChanges() : This fucntion is authorized only in comps that have @Input
     N.B : ngOnChanges is called before ngOnInit, after that its called every time there is a change
-    - ngOnDoCheck() : This method is called each time there is an event in mother or shild comp
+    - ngDoCheck() : This method is called each time there is an event in mother or shild comp
     N.B : In the most cases we dont use it
+    N.B : Never implement ngOnChanges and ngDoCheck in the same comp
+    - @ViewChild and ngAfterViewInit() :
+      -- @ViewChild => Instance child comp in mother comp, so you can use that object here
+      -- ngAfterViewInit() => We have ngOnInit stage came before rendering the view so if we display the
+        instanciated object in this stage, the value of object is undefined, so that why we have
+        ngAfterViewInit() stage, called after rendering the view, so in this stage we can handl te object
+      - ngAfterViewChecked() : Like the previous one, but this is called in every detected event
   */
 
     // ChangeDetection.onPush exemple :
@@ -95,5 +104,19 @@ export class Rooms {
       // Or
       // this.roomList = [...this.roomList, this.rooms];
       console.log(this.roomList);
+    }
+
+    list = new Array();
+    @ViewChild(Header/*, {static: true}*/) header!: Header; // If we made this option : {static: true}, the object
+    // going to be ready to be used, by default its false
+
+    ngAfterViewInit() {
+      console.log(this.header);
+      // this.header.title = "Saada";
+    }
+
+    ngAfterViewChecked() {
+      // this.header.title = "Saada";
+      console.log(this.header)
     }
 }

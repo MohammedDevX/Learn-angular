@@ -89,13 +89,13 @@ export class RoomsList {
     // - currentValue
     // - previousValue
     // - firstChange
-    console.log(changes);
-    console.log(changes["rooms"].currentValue[0]); // This is how you can access to
+    // console.log(changes);
+    // console.log(changes["rooms"].currentValue[0]); // This is how you can access to
     // console.log(changes["hotelName"].currentValue);
   }
 
   // This method is called each time there is an event in mother or shild comp
   ngDoCheck() {
-    console.log("checked ");
+    // console.log("checked ");
   }
 }
