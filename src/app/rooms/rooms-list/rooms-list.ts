@@ -84,11 +84,13 @@ export class RoomsList {
   // ngOnChanges si declared by default the first time the comp is rendered before constructor, after that every
   // time @Input undergoes a change
   ngOnChanges(changes: SimpleChanges) {
-    // SimpleChanges is an object who contain one or multiple SimpleChange objects, eache one hase 3
-    // properties :
-    // - currentValue
-    // - previousValue
-    // - firstChange
+    /*
+    SimpleChanges is an object who contain one or multiple SimpleChange objects, eache one hase 3
+      properties :
+        - currentValue
+        - previousValue
+        - firstChange
+    */
     // console.log(changes);
     // console.log(changes["rooms"].currentValue[0]); // This is how you can access to
     // console.log(changes["hotelName"].currentValue);

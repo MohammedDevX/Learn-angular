@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Rooms } from './rooms/rooms';
 
@@ -20,4 +20,24 @@ import { Rooms } from './rooms/rooms';
 })
 export class App {
   protected readonly title = signal('learn_angular2');
+
+  // ViewContainerRef: an Angular container used to dynamically insert or remove views (ng-template) or components
+  // In this example, we have an ng-template in the HTML with the reference #user. This template contains HTML
+  // (and can include components like Rooms), but it is NOT displayed automatically
+  // ng-template: an HTML template that is not rendered by default It is rendered only when Angular
+  // is instructed to do
+  // N.B : ng-template defines WHAT to render ViewContainerRef defines WHERE and WHEN to render
+  @ViewChild("user", {read: ViewContainerRef}) vcr!: ViewContainerRef;
+
+  ngAfterViewInit(): void {
+    let instRef = this.vcr.createComponent(Rooms); //Here we insert Rooms comp to the container
+    let ob = instRef.instance;
+    console.log(ob.hotelName);
+  }
+
+  // In this exemple we access to an element html by reference #name, and we add innerText to this element
+  @ViewChild('name', {static: true}) name!: ElementRef;
+  ngOnInit(): void {
+    this.name.nativeElement.innerText = "Hello from view child";
+  }
 }

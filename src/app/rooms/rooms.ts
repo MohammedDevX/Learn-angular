@@ -106,17 +106,17 @@ export class Rooms {
       console.log(this.roomList);
     }
 
-    list = new Array();
+    // ViewChild() : Can access to other comp instance also ref elemnts html
     @ViewChild(Header/*, {static: true}*/) header!: Header; // If we made this option : {static: true}, the object
-    // going to be ready to be used, by default its false
+    // going to be ready to be used in ngOnInit, by default its false
 
     ngAfterViewInit() {
-      console.log(this.header);
-      // this.header.title = "Saada";
+      this.header.title = "Saada";
+      // console.log(this.header);
     }
 
     ngAfterViewChecked() {
       // this.header.title = "Saada";
-      console.log(this.header)
+      // console.log(this.header)
     }
 }
