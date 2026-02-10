@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
 import { RoomsList } from './rooms-list/rooms-list';

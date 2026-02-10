@@ -1,8 +1,10 @@
-import { Component, ElementRef, signal, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, QueryList, signal, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Rooms } from './rooms/rooms';
+import { IRooms } from './rooms/irooms';
+import { Header } from './header/header';
 
-// @Component : is a decodator that give the element an behavior in run time, for ex here we said this
+// @Component : is a decodator that give the class an behavior in run time, for ex here we said this
 // class must be as component, like annotations in .net
 @Component({
   // This object is a meta data : meta data is a data that describe the structrel behavior of the element
@@ -27,17 +29,34 @@ export class App {
   // ng-template: an HTML template that is not rendered by default It is rendered only when Angular
   // is instructed to do
   // N.B : ng-template defines WHAT to render ViewContainerRef defines WHERE and WHEN to render
-  @ViewChild("user", {read: ViewContainerRef}) vcr!: ViewContainerRef;
+  // Use case of this method when you want to display an comp after a spesefic behavior
+  @ViewChild("user", {read: ViewContainerRef, static: true}) vcr!: ViewContainerRef;
 
   ngAfterViewInit(): void {
-    let instRef = this.vcr.createComponent(Rooms); //Here we insert Rooms comp to the container
-    let ob = instRef.instance;
-    console.log(ob.hotelName);
+    // let instRef = this.vcr.createComponent(Rooms); //Here we insert Rooms comp to the container
+    // let ob = instRef.instance;
+    // console.log(ob.hotelName);
+    // this.rooms = ob.roomList;
+    this.roomList.forEach(e => {
+      console.log(e.nativeElement);
+    });
   }
+
+  rooms: IRooms[] = [];
 
   // In this exemple we access to an element html by reference #name, and we add innerText to this element
   @ViewChild('name', {static: true}) name!: ElementRef;
   ngOnInit(): void {
     this.name.nativeElement.innerText = "Hello from view child";
+    /*
+      In this exemple we made the vcr {static: true}, and in ngOnInit() we insert Room comp in the container, and
+      affect roomList to rooms attribut, after that we displayed rooms in <li> element in roomList html template,
+      and get the elemnts in ViewChildren
+    */
+    let ob = this.vcr.createComponent(Rooms);
+    this.rooms = ob.instance.roomList;
   }
+
+  // ViewChidren : Like ViewChild, but this one can access to multiple components, and html elements by QueryList
+  @ViewChildren("roomList") roomList!: QueryList<ElementRef>;
 }

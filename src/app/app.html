@@ -4,6 +4,13 @@
     <!-- <app-rooms></app-rooms> -->
     <ng-container #user></ng-container>
     <div #name></div>
+    <div>
+      <ul>
+        @for (room of rooms; track room.id) {
+          <li #roomList>{{room.totalRooms}}</li>
+        }
+      </ul>
+    </div>
   </div>
 </main>
 
