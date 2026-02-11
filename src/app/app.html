@@ -1,8 +1,8 @@
 <main class="main">
   <div class="content">
     <!-- <p>Hello world!!!!</p> -->
-    <!-- <app-rooms></app-rooms> -->
-    <ng-container #user></ng-container>
+    <app-rooms></app-rooms>
+    <!-- <ng-container #user></ng-container>
     <div #name></div>
     <div>
       <ul>
@@ -10,8 +10,13 @@
           <li #roomList>{{room.totalRooms}}</li>
         }
       </ul>
-    </div>
+    </div> -->
   </div>
+  <app-container>
+    <h2>From container</h2>
+    <p footer>This is footer from container</p>
+    <p header>This is header from container</p>
+  </app-container>
 </main>
 
 <router-outlet />

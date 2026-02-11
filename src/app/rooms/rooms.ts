@@ -106,9 +106,14 @@ export class Rooms {
       console.log(this.roomList);
     }
 
-    // ViewChild() : Can access to other comp instance also ref elemnts html
+    // ViewChild() : Can access to other comp instance, by adding the selector of child comp in mother one, and
+    // access to that instanc by @ViewChild
+    // N.B : He have an other use case whene we want to diplay the child comp after spesefic behavior, we add
+    // an ng-template with a reference for ex #header, and in @ViewChild we get the template and add
+    // read: ViewContainerRef, its a container who can insert and remove an comp or html attribut and work
+    // with it in the template, see exemple in app.ts
     @ViewChild(Header/*, {static: true}*/) header!: Header; // If we made this option : {static: true}, the object
-    // going to be ready to be used in ngOnInit, by default its false
+    // is ready to be used in ngOnInit, by default its false
 
     ngAfterViewInit() {
       this.header.title = "Saada";

@@ -1,0 +1,8 @@
+<!-- This comp can be reutilisable, so the content of this comp can be changed from mother comp to other, thats wy
+we use <ng-content>, when we call the selector of child comp in mother one and fill him by the specified content -->
+<ng-content></ng-content>
+<!-- Whene we add select attribut to ng-content we define like a place to made spesifique cotent that going to respect
+shild comp order, for exemple in parent comp if we start with footer after that header, hes going to display
+the header before footer  -->
+<ng-content select="[header]"></ng-content>
+<ng-content select="[footer]"></ng-content>
