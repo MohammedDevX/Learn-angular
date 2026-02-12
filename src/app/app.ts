@@ -1,4 +1,4 @@
-import { Component, ElementRef, QueryList, signal, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import { Component, ContentChild, ElementRef, QueryList, signal, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Rooms } from './rooms/rooms';
 import { IRooms } from './rooms/irooms';
@@ -38,6 +38,7 @@ export class App {
     // let ob = instRef.instance;
     // console.log(ob.hotelName);
     // this.rooms = ob.roomList;
+    console.log("After View Init");
     this.roomList.forEach(e => {
       console.log(e.nativeElement);
     });
@@ -60,4 +61,16 @@ export class App {
 
   // ViewChidren : Like ViewChild, but this one can access to multiple components, and html elements by QueryList
   @ViewChildren("roomList") roomList!: QueryList<ElementRef>;
+
+  @ContentChild("title") titre!: ElementRef;
+  @ContentChild("footer") footer!: ElementRef;
+
+  ngAfterContentInit(): void {
+    console.log(this.titre);
+    // console.log(this.footer);
+  }
+
+  ngOnDestroy() {
+    console.log("Destrcuction");
+  }
 }

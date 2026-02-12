@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ContentChild, ViewChild, ViewContainerRef } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
 import { RoomsList } from './rooms-list/rooms-list';
@@ -88,12 +88,17 @@ export class Rooms {
     - ngDoCheck() : This method is called each time there is an event in mother or shild comp
     N.B : In the most cases we dont use it
     N.B : Never implement ngOnChanges and ngDoCheck in the same comp
-    - @ViewChild and ngAfterViewInit() :
-      -- @ViewChild => Instance child comp in mother comp, so you can use that object here
+    - @ViewChild, @ViewChildren, ngAfterViewInit() and ngAfterViewChecked() :
+      -- @ViewChild => Access to internal template of mother comp
+      -- @ViewChildren => Like @ViewChild, but this one can access to multiple inctances by QueryList
       -- ngAfterViewInit() => We have ngOnInit stage came before rendering the view so if we display the
         instanciated object in this stage, the value of object is undefined, so that why we have
         ngAfterViewInit() stage, called after rendering the view, so in this stage we can handl te object
       - ngAfterViewChecked() : Like the previous one, but this is called in every detected event
+    - @ContentChild and ngAfterContentInit() :
+      -- @ContentChild: Access to ng-content children comps
+      - ngAfterContentInit() : Function called after rendering the content
+    - @ngOnDestroy() : Called before the destruction of component
   */
 
     // ChangeDetection.onPush exemple :
@@ -124,4 +129,4 @@ export class Rooms {
       // this.header.title = "Saada";
       // console.log(this.header)
     }
-}
+  }
