@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class RoomsList {
   /*
-    Binding data from component to other :
+    Binding data from parent component to shild one :
     - @Input
     - @Output
   */
@@ -75,7 +75,7 @@ export class RoomsList {
     For ex we have an event in parent comp that push a room in roomList object, but we push on the same reference
     in this case child comp not going to detecte the change because its made on parent comp,
     but we have @Input ? even if @Input going to receive the new element but because we made the change only
-    with ref, so the changeDetection not going to detecte the changement, so the solution is work wiht
+    with ref, so the changeDetection not going to detecte the changement, so the solution is work with
     spread operators
     N.B : If the click event was in child comp the change going to be detected even if you work with
     reference because, the event is detected

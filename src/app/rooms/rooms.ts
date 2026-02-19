@@ -1,8 +1,10 @@
-import { Component, ContentChild, ViewChild, ViewContainerRef } from '@angular/core';
+// import { Rooms } from './../Services/rooms';
+import { Component, ContentChild, Self, ViewChild, ViewContainerRef } from '@angular/core';
 import { IRooms } from './irooms';
 import { CommonModule } from '@angular/common';
 import { RoomsList } from './rooms-list/rooms-list';
 import { Header } from '../header/header';
+import { RoomsHandler } from '../Services/rooms-handler';
 
 @Component({
   selector: 'app-rooms',
@@ -10,8 +12,41 @@ import { Header } from '../header/header';
   imports: [CommonModule, RoomsList, Header],
   templateUrl: './rooms.html',
   styleUrl: './rooms.css',
+  providers: [RoomsHandler]
 })
 export class Rooms {
+  /*
+    1) Dependency injection :
+    2) Singleton injcetion in root injector :
+    3) @Self :
+    4) @SkipSelf :
+  */
+  /* 1)
+    Here we inject roomHandler service in this comp
+    Dep injection able us to not instantiate the class manually, because if we do that we can have some services
+    that use multiples dependencies, so you are in the necessary to instantiate all thos deps, against dep
+    injection who does this work automaticly
+   */
+
+    /*
+      3) @Self :
+      By default the service injected by injector Root
+      each comp can have here own injector, to add service to injector of the comp, you should to add him in
+      providers attribut
+      @Self : The comp going to see if the service existe in here own injector, so he will not see the injector of
+      parent comp (App), or root injector, if the comp doesnt existe he display error
+    */
+    /*
+      4) @SkipSelf :
+      If the comp can have here own instance of the service, and we wants to ignore this instance and pass to the
+      next instance we use @SkipSelf
+    */
+  constructor(@Self() private roomHandler: RoomsHandler) {
+    // console.log("New instance room component");
+  }
+
+  // N.B : Angular create new instance for components each time we call the selector of the comp
+  // For exemple if we call <app-header></app-header> two times, hes going to instance the comp 2 times
 
   // If you want to display this variable in the html, you must work with (interpolation), see the html file
   hotelName:string = "Saada";
@@ -39,11 +74,13 @@ export class Rooms {
     bookedRomms: 5
   }
 
-  roomList: IRooms[] = [
-    {id:2, totalRooms: 56, availableRoom: false, bookedRomms: 14},
-    {id:1, totalRooms: 12, availableRoom: true, bookedRomms: 4},
-    {id:3, totalRooms: 40, availableRoom: false, bookedRomms: 30}
-  ]
+  // roomList: IRooms[] = [
+  //   {id:2, totalRooms: 56, availableRoom: false, bookedRomms: 14},
+  //   {id:1, totalRooms: 12, availableRoom: true, bookedRomms: 4},
+  //   {id:3, totalRooms: 40, availableRoom: false, bookedRomms: 30}
+  // ]
+
+  roomList!: IRooms[];
 
   role: string = "client";
 
@@ -60,6 +97,7 @@ export class Rooms {
     // console.log("init value");
     // this.increase();
     // console.log(this.header);
+    this.roomList = this.roomHandler.getRooms();
   }
 
   selectedRoom!: IRooms; // N.B : Whene you want to initialize an attribut you must to pass

@@ -2,7 +2,6 @@ import { Component, ContentChild, ElementRef, QueryList, signal, ViewChild, View
 import { RouterOutlet } from '@angular/router';
 import { Rooms } from './rooms/rooms';
 import { IRooms } from './rooms/irooms';
-import { Header } from './header/header';
 import { Container } from './container/container';
 
 // @Component : is a decodator that give the class an behavior in run time, for ex here we said this
